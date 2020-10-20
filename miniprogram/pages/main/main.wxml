@@ -1,0 +1,65 @@
+<!--miniprogram/pages/main/main.wxml-->
+
+<view wx:if="{{pageinfo}}">
+    <view class="head">
+        <view class="main">
+            <text>{{pageinfo.head.main.name}}({{pageinfo.head.main.simple_desc}})\n</text>
+            <text space="ensp"> {{pageinfo.head.main.detailed_desc}}</text>
+        </view>
+        <view class="attribute_bar">
+            <block wx:for="{{pageinfo.head.attribute_bar}}" wx:key="*this">
+                <text>{{item.attribute}} : {{item.value}}\n</text>
+            </block>
+        </view>
+        <view class="navigation_bar">
+            <!-- 点击导航栏后会滑动到对应的锚点 -->
+            <!-- 一级标题 -->
+            <block wx:for="{{pageinfo.relative}}" wx:key="*this" wx:for-index="first">
+                <view class="first_head">
+                    <text bindtap="scroll" data-first="{{first}}">{{first+1}}:{{item.first_title}}</text>
+                </view>
+                <!-- 二级标题 -->
+                <block wx:if="{{item.children}}">
+                    <block wx:for="{{item.children}}" wx:key="*this" wx:for-index="second">
+                        <view class="second_head" bindtap="scroll" data-first="{{first}}" data-second="{{second}}">
+                            <text space="ensp"> {{first+1}}-{{second+1}}:{{item.second_title}}</text>
+                        </view>
+                    </block>
+                </block>
+            </block>
+        </view>
+        <view class="tag_list">
+            <block wx:for="{{pageinfo.head.tag_list}}" wx:key="*this">
+                <view class="tag_item" bindtap="navigate_tag" data-tagid="{{item}}">
+                    <button class="tag_button">{{item}}</button>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="relative">
+        <!-- 一级标题 -->
+        <block wx:for="{{pageinfo.relative}}" wx:key="*this" wx:for-index="first">
+            <view id="fhead_{{first}}" class="first_head">
+                <text bindtap="scroll" data-first="{{first}}">{{first+1}}:{{item.first_title}}</text>
+            </view>
+            <!-- 二级标题 -->
+            <block wx:if="{{item.children}}">
+                <block wx:for="{{item.children}}" wx:key="*this" wx:for-index="second">
+                    <view id="shead_{{first}}_{{second}}" class="second_head" bindtap="scroll" data-first="{{first}}"
+                        data-second="{{second}}">
+                        <text space="ensp"> {{first+1}}-{{second+1}}:{{item.second_title}}</text>
+                    </view>
+                    <view class="content">
+                        <text space="ensp"> {{item.content}}</text>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class="content">
+                    <text space="ensp"> {{item.content}}</text>
+                </view>
+            </block>
+        </block>
+    </view>
+    <text>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</text>
+</view>

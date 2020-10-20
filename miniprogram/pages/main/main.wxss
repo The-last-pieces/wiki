@@ -1,0 +1,11 @@
+/* miniprogram/pages/main/main.wxss */
+
+.head view{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.second_head{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
